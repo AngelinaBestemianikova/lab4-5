@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Shapes;
 using Path = System.IO.Path;
 using lab4_5.Models;
 using System.Windows.Input;
@@ -25,23 +22,25 @@ namespace lab4_5
 
             DataContext = this;
 
-            LoadProductsFromFile("product_data.json");
+            LoadProductsFromFile("product_data.json");          
         }
 
-        private void LoadProductsFromFile(string fileName)
+        public void LoadProductsFromFile(string fileName)
         {
             var pathToFile = Path.Combine(Environment.CurrentDirectory, fileName);
             var streamReader = new StreamReader(pathToFile);
-            var jsonStringStudent = File.ReadAllText(pathToFile);
-            streamReader.Close();                    
+            var jsonStringProduct = File.ReadAllText(pathToFile);
+            streamReader.Close();
 
-            ProductCollection = JsonSerializer.Deserialize<List<Product>>(jsonStringStudent);
+            ProductCollection = JsonSerializer.Deserialize<List<Product>>(jsonStringProduct);
         }
 
-        private void AddProduct_Click(object sender, RoutedEventArgs e)
+        private void CommandAddProduct_Click(object sender, ExecutedRoutedEventArgs e)
         {
-            AddProductWindow addProduct = new AddProductWindow(_productCollection);
+            AddProductWindow addProduct = new AddProductWindow(ProductCollection);
             addProduct.ShowDialog();
+            LoadProductsFromFile("product_data.json");
+            productsGrid.ItemsSource = ProductCollection;
         }
 
         private void DataGrid_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -52,8 +51,42 @@ namespace lab4_5
                 {
                     DetalizationWindow detalizationWindow = new DetalizationWindow(selectedProduct);
                     detalizationWindow.ShowDialog();
+                    LoadProductsFromFile("product_data.json");
+                    productsGrid.ItemsSource = ProductCollection;
                 }
             }
+        }
+
+        private void menuSearch_Click(object sender, RoutedEventArgs e)
+        {
+            var searchWindow = new SearchWindow();
+            searchWindow.ShowDialog();
+
+            var nameLongSearcCriteria = searchWindow.SearchData.SearchNameLong;
+            var nameShortSearcCriteria = searchWindow.SearchData.SearchNameShort;
+
+            _productCollection = _productCollection
+                .Where(p => string.IsNullOrEmpty(nameShortSearcCriteria) || p.NameShort.Contains(nameShortSearcCriteria))
+                .Where(p => string.IsNullOrEmpty(nameLongSearcCriteria) || p.NameLong.Contains(nameLongSearcCriteria))
+                .ToList();
+            DataContext = this;
+        }
+
+        private void menuAllProduct_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Вы уже на этой странице", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void menuSelection_Click(object sender, RoutedEventArgs e)
+        {
+            var selectionWindow = new SelectionWindow();
+            selectionWindow.ShowDialog();
+        }
+
+        private void menuFilter_Click(object sender, RoutedEventArgs e)
+        {
+            var filtrationWindow = new FiltrationWindow();
+            filtrationWindow.ShowDialog();
         }
     }
 }

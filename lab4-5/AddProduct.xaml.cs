@@ -20,21 +20,31 @@ namespace lab4_5
     public partial class AddProductWindow : Window
     {
         public List<Product> _productCollection;
-        
+
         private Product product;
         private string pathToFile;
-       
+
         public AddProductWindow(List<Product> productCollection)
         {
             InitializeComponent();
             _productCollection = productCollection;
-            product = new Product();         
+            product = new Product();
             pathToFile = Path.Combine(Environment.CurrentDirectory, "product_data.json");
+
+            if (File.Exists(pathToFile))
+            {
+                var jsonString = File.ReadAllText(pathToFile);
+                _productCollection = JsonSerializer.Deserialize<List<Product>>(jsonString);
+            }
+            else
+            {
+                _productCollection = new List<Product>();
+            }
         }
 
         private void bSaveToFile_Click(object sender, RoutedEventArgs e)
         {
-            product.NameShort = tbNameShort.Text;            
+            product.NameShort = tbNameShort.Text;
             product.NameLong = tbNameLong.Text;
             product.Description = tbDescription.Text;
             product.Category = cbCategory.Text;
@@ -53,7 +63,7 @@ namespace lab4_5
                 MessageBox.Show("Поле 'Количесто' пустое. Введите количество", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            product.Quantity = double.Parse(tbQuantity.Text);                      
+            product.Quantity = double.Parse(tbQuantity.Text);
 
             if (string.IsNullOrEmpty(tbPrice.Text))
             {
@@ -61,7 +71,7 @@ namespace lab4_5
                 return;
             }
             product.Price = decimal.Parse(tbPrice.Text);
-      
+
             if (rbYes.IsChecked == false && rbNone.IsChecked == false)
             {
                 MessageBox.Show("Выберите доступность товара", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -80,15 +90,25 @@ namespace lab4_5
                 MessageBox.Show("Поле 'Рейтинг' пустое. Введите рейтинг", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            product.Score = double.Parse(tbScore.Text);           
+            product.Score = double.Parse(tbScore.Text);
 
             _productCollection.Add(product);
 
-            var jsonStringStudent = JsonSerializer.Serialize(_productCollection);
-            var streamWriter = new StreamWriter(pathToFile);
-            streamWriter.Write(jsonStringStudent);
-            streamWriter.Flush();
-            streamWriter.Close();
+            var jsonStringProduct = JsonSerializer.Serialize(_productCollection);
+            File.WriteAllText(pathToFile, jsonStringProduct);
+            MessageBox.Show($"Файл успешно сохранен.\nПуть: {pathToFile}", "Сохранение в файл", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            //tbNameShort.Text = null;
+            //tbNameLong.Text = null;
+            //tbDescription.Text = null;
+            //cbCategory.Text = null;
+            //tbCountry.Text = null;
+            //tbQuantity.Text = null;
+            //tbPrice.Text = null;
+            //tbScore.Text = null;
+            //rbNone.IsChecked = false;
+            //rbYes.IsChecked = false;
+            //image.Source = null;
         }
 
         private void bGoBackToAllProducts_Click(object sender, RoutedEventArgs e)
@@ -110,12 +130,10 @@ namespace lab4_5
                 bitmapImage.UriSource = new Uri(imagePath);
                 bitmapImage.EndInit();
 
-                // Присвойте bitmapImage свойству Image на вашем окне или элементе управления
-                // Например, если у вас есть элемент Image с именем "imageControl":
                 image.Source = bitmapImage;
 
                 product.PathToPhoto = imagePath;
             }
-        }
+        }        
     }
 }

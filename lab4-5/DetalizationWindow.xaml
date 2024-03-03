@@ -35,9 +35,13 @@
         <Button x:Name="bGoBackToAllProducts" Content="Вернуться ко всем товарам" HorizontalAlignment="Left" Margin="364,364,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Click="bGoBackToAllProducts_Click"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="601,63,0,0" VerticalAlignment="Top" Width="100"/>
         <Button x:Name="LoadImage" IsEnabled="False" Content="Загрузить фотографию" HorizontalAlignment="Left" Margin="601,174,0,0" VerticalAlignment="Top" Padding="10,5" Click="bLoadImage_Click"/>
-        <Button x:Name="EditProduct" Content="Редактировать" HorizontalAlignment="Left" Margin="601,364,0,0" VerticalAlignment="Top" Padding="10,5" Click="bEditProduct_Click"/>
+        <Button x:Name="EditProduct" Content="Редактировать" HorizontalAlignment="Left" Margin="601,364,0,0" VerticalAlignment="Top" Padding="10,5" Command="Replace">
+            <Button.CommandBindings>
+                <CommandBinding Command="Replace" Executed="CommandBinding_Executed"/>
+            </Button.CommandBindings>
+        </Button>
         <Button x:Name="DeleteProduct" Content="Удалить" HorizontalAlignment="Left" Margin="717,364,0,0" VerticalAlignment="Top" Padding="10,5" Click="bDeleteProduct"/>
-        <Button IsEnabled="False" x:Name="SaveChanges" Content="Сохранить" HorizontalAlignment="Left" Margin="601,326,0,0" VerticalAlignment="Top" Padding="10,5" Width="103"/>
+        <Button IsEnabled="False" x:Name="SaveChanges" Content="Сохранить" HorizontalAlignment="Left" Margin="601,326,0,0" VerticalAlignment="Top" Padding="10,5" Width="103" Click="SaveChanges_Click"/>
 
     </Grid>
 </Window>

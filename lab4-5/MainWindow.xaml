@@ -6,18 +6,50 @@
         xmlns:local="clr-namespace:lab4_5"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <ControlTemplate x:Key="RoundedButton" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#EAB01E"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#EAB01E"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <!-- Верхняя панель с меню -->
         <Grid>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Background="Navy"  Margin="0" Width="800px">
-                <Button Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Все товары" Margin="5"/>
-                <Button Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Поиск" Margin="5"/>
-                <Button Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Фильтрация" Margin="5"/>
-                <Button Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Выборка" Margin="5"/>
+                <Button x:Name="menuAllProduct" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Все товары" Margin="5" Click="menuAllProduct_Click"/>
+                <Button x:Name="menuSearch" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Поиск" Margin="5" Click="menuSearch_Click"/>
+                <Button x:Name="menuFilter" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Фильтрация" Margin="5" Click="menuFilter_Click"/>
+                <Button x:Name="menuSelection" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Выборка" Margin="5" Click="menuSelection_Click"/>
             </StackPanel>
         </Grid>
 
-        <DataGrid IsReadOnly="True"  ItemsSource="{Binding ProductCollection}" AutoGenerateColumns="False" PreviewMouseDoubleClick="DataGrid_PreviewMouseDoubleClick" Margin="0,30,0,0">
+        <DataGrid x:Name="productsGrid" IsReadOnly="True" ItemsSource="{Binding ProductCollection}" AutoGenerateColumns="False" PreviewMouseDoubleClick="DataGrid_PreviewMouseDoubleClick" Margin="0,30,0,0">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Изображение">
                     <DataGridTemplateColumn.CellTemplate>
@@ -32,7 +64,18 @@
                 <DataGridTextColumn Width="100" Header="Количество" Binding="{Binding Quantity}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="AddProduct" Content="Добавить продукт" Click="AddProduct_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20" Padding="10,5" AutomationProperties.Name="AddProduct"/>
+      
+        <Button Template="{DynamicResource RoundedButton}" x:Name="AddProduct" FontFamily="Arial" Content="Добавить продукт" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20" Padding="15,10" AutomationProperties.Name="AddProduct" BorderThickness="0,0,0,0" Background="#FFABC8FF" Foreground="Black" Command="Open">
+            <Button.CommandBindings>
+                <CommandBinding Command="Open" Executed="CommandAddProduct_Click"/>
+            </Button.CommandBindings>
+            <Button.Style>
+                <Style/>
+            </Button.Style>
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
     </Grid>
 
 
