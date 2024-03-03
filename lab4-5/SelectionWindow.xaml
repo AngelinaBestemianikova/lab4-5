@@ -22,11 +22,10 @@
         </ComboBox>
         <TextBlock HorizontalAlignment="Center" Margin="0,146,0,0" TextWrapping="Wrap" Text="Стоимость (число-число)" VerticalAlignment="Top"/>
         <TextBox x:Name="tbPrice" HorizontalAlignment="Left" Margin="30,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="bGoBack" Content="Вернуться назаз" HorizontalAlignment="Left" Width="120" Margin="31,39,0,0" Grid.Row="1" VerticalAlignment="Top" Command="Close">
+        <Button x:Name="bGoBack" Content="Сделать выборку" HorizontalAlignment="Left" Width="120" Margin="31,39,0,0" Grid.Row="1" VerticalAlignment="Top" Command="Close">
             <Button.CommandBindings>
                 <CommandBinding Command="Close" Executed="CommandClose_Executed" />
             </Button.CommandBindings>
         </Button>
-
     </Grid>
 </Window>

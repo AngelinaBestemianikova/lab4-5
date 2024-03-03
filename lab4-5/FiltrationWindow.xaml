@@ -33,8 +33,6 @@
         <TextBox x:Name="tbCountry" HorizontalAlignment="Left" Margin="364,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="364,219,0,0" TextWrapping="Wrap" Text="Рейтинг" VerticalAlignment="Top"/>
         <TextBox x:Name="tbScore" HorizontalAlignment="Left" Margin="364,241,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="bGoBackToAllProducts" Content="Вернуться назад" HorizontalAlignment="Left" Margin="364,364,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Click="bGoBackToAllProducts_Click"/>
-        <Button Content="Сохранить в файл" HorizontalAlignment="Left" Margin="364,327,0,0" Padding="10,5" VerticalAlignment="Top" Click="bSaveToFile_Click" AutomationProperties.Name="bSaveToFile" Width="173"/>
-
+        <Button x:Name="bGoBackToAllProducts" Content="Отфильтровать" HorizontalAlignment="Left" Margin="364,364,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Click="bGoBackToAllProducts_Click"/>
     </Grid>
 </Window>

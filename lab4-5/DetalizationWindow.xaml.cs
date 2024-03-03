@@ -30,7 +30,7 @@ namespace lab4_5
             _selectedProduct = selectedProduct;
         }
 
-        private void bGoBackToAllProducts_Click(object sender, RoutedEventArgs e)
+        private void bGoBackToAllProducts_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Close();
         }

@@ -76,6 +76,7 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
+        <Button Content="Загрузить данные" HorizontalAlignment="Left" Margin="185,387,0,0" VerticalAlignment="Top" Height="27" Width="134" Click="Button_Click"/>
     </Grid>
 
 

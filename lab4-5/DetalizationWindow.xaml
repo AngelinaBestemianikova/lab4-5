@@ -32,7 +32,11 @@
         <TextBox IsReadOnly="True" x:Name="tbCountry" HorizontalAlignment="Left" Margin="364,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="364,219,0,0" TextWrapping="Wrap" Text="Рейтинг" VerticalAlignment="Top"/>
         <TextBox IsReadOnly="True" x:Name="tbScore" HorizontalAlignment="Left" Margin="364,241,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="bGoBackToAllProducts" Content="Вернуться ко всем товарам" HorizontalAlignment="Left" Margin="364,364,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Click="bGoBackToAllProducts_Click"/>
+        <Button x:Name="bGoBackToAllProducts" Content="Вернуться ко всем товарам" HorizontalAlignment="Left" Margin="364,364,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Command="Close">
+            <Button.CommandBindings>
+                <CommandBinding Command="Close" Executed="bGoBackToAllProducts_Executed"/>
+            </Button.CommandBindings>
+        </Button>
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="601,63,0,0" VerticalAlignment="Top" Width="100"/>
         <Button x:Name="LoadImage" IsEnabled="False" Content="Загрузить фотографию" HorizontalAlignment="Left" Margin="601,174,0,0" VerticalAlignment="Top" Padding="10,5" Click="bLoadImage_Click"/>
         <Button x:Name="EditProduct" Content="Редактировать" HorizontalAlignment="Left" Margin="601,364,0,0" VerticalAlignment="Top" Padding="10,5" Command="Replace">

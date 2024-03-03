@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace lab4_5
 {
@@ -22,16 +10,45 @@ namespace lab4_5
         public FiltrationWindow()
         {
             InitializeComponent();
+            FiltrationData = new FiltrationData();
         }
 
-        private void bSaveToFile_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        public FiltrationData FiltrationData { get; set; }
 
         private void bGoBackToAllProducts_Click(object sender, RoutedEventArgs e)
         {
+            FiltrationData.NameShort = tbNameShort.Text;
+            FiltrationData.NameLong = tbNameLong.Text;
+            FiltrationData.Category = cbCategory.Text;
+            FiltrationData.Price = tbPrice.Text;
+            FiltrationData.Quantity = tbQuantity.Text;
+            FiltrationData.Score = tbScore.Text;
+            FiltrationData.Country = tbCountry.Text;
+            FiltrationData.IsAvailable = rbYes.IsChecked;
+            FiltrationData.IsNotAvailable = rbNone.IsChecked;
 
+            Close();
         }
+    }
+
+    public class FiltrationData
+    {
+        public string NameShort { get; set; }
+
+        public string NameLong { get; set; }
+
+        public string Category { get; set; }
+
+        public string Price { get; set; }
+
+        public string Quantity { get; set; }
+
+        public string Score { get; set; }
+
+        public string Country { get; set; }
+
+        public bool? IsAvailable { get; set; }
+
+        public bool? IsNotAvailable { get; set; }
     }
 }

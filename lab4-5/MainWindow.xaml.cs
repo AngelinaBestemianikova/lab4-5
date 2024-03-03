@@ -15,7 +15,6 @@ namespace lab4_5
     {
         public List<Product> ProductCollection { get; set; }
 
-        private List<Product> _productCollection;
         public AllProductWindow()
         {
             InitializeComponent();
@@ -65,11 +64,11 @@ namespace lab4_5
             var nameLongSearcCriteria = searchWindow.SearchData.SearchNameLong;
             var nameShortSearcCriteria = searchWindow.SearchData.SearchNameShort;
 
-            _productCollection = _productCollection
+            ProductCollection = ProductCollection
                 .Where(p => string.IsNullOrEmpty(nameShortSearcCriteria) || p.NameShort.Contains(nameShortSearcCriteria))
                 .Where(p => string.IsNullOrEmpty(nameLongSearcCriteria) || p.NameLong.Contains(nameLongSearcCriteria))
                 .ToList();
-            DataContext = this;
+            productsGrid.ItemsSource = ProductCollection;
         }
 
         private void menuAllProduct_Click(object sender, RoutedEventArgs e)
@@ -81,12 +80,44 @@ namespace lab4_5
         {
             var selectionWindow = new SelectionWindow();
             selectionWindow.ShowDialog();
+
+            var category = selectionWindow.SelectionData.Category;
+            var priceRange = selectionWindow.SelectionData.PriceRange;
+
+            var minPrice = 0.0m;
+            var maxPrice = 0.0m;
+            if (!string.IsNullOrEmpty(priceRange))
+            {
+                minPrice = decimal.Parse(priceRange.Split('-')[0]);
+                maxPrice = decimal.Parse(priceRange.Split('-')[1]);
+            }
+
+            ProductCollection = ProductCollection
+                .Where(p => string.IsNullOrEmpty(category) || p.Category.Contains(category))
+                .Where(p => string.IsNullOrEmpty(priceRange) || (p.Price >= minPrice && p.Price <= maxPrice))
+                .ToList();
+            productsGrid.ItemsSource = ProductCollection;
         }
 
         private void menuFilter_Click(object sender, RoutedEventArgs e)
         {
             var filtrationWindow = new FiltrationWindow();
             filtrationWindow.ShowDialog();
+
+            var isAvailable = filtrationWindow.FiltrationData.IsAvailable;
+            var isNotAvailable = filtrationWindow.FiltrationData.IsNotAvailable;
+
+            ProductCollection = ProductCollection
+                .Where(p => !(bool)isAvailable! || p.IsAvailable)
+                .Where(p => !(bool)isNotAvailable! || p.IsNotAvailable)
+                .ToList();
+            productsGrid.ItemsSource = ProductCollection;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoadProductsFromFile("product_data.json");
+            productsGrid.ItemsSource = ProductCollection;
         }
     }
 }
