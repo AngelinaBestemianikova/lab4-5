@@ -13,6 +13,8 @@ namespace lab4_5
 {
     public partial class AllProductWindow : Window
     {
+        private Cursor cursor = new Cursor(Application.GetRemoteStream(new Uri("Cursors/myCursor.cur", UriKind.Relative)).Stream);
+
         public List<Product> ProductCollection { get; set; }
 
         public AllProductWindow()
@@ -21,7 +23,9 @@ namespace lab4_5
 
             DataContext = this;
 
-            LoadProductsFromFile("product_data.json");          
+            LoadProductsFromFile("product_data.json");
+            
+            mainForm.Cursor = cursor;
         }
 
         public void LoadProductsFromFile(string fileName)

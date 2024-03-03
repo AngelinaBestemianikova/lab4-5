@@ -6,7 +6,8 @@
     xmlns:local="clr-namespace:lab4_5"
     xmlns:Components="clr-namespace:lab4_5.Components" x:Class="lab4_5.AllProductWindow"
     mc:Ignorable="d"
-    Title="MainWindow" Height="450" Width="800">
+    Title="MainWindow" Height="450" Width="800"
+    x:Name="mainForm">
     <Grid>
         <!-- Верхняя панель с меню -->
         <Grid>
