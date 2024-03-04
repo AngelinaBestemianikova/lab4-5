@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Input;
 
 namespace lab4_5
 {
@@ -7,15 +9,17 @@ namespace lab4_5
     /// </summary>
     public partial class FiltrationWindow : Window
     {
+        private Cursor cursor = new Cursor(Application.GetRemoteStream(new Uri("Cursors/myCursor.cur", UriKind.Relative)).Stream);
         public FiltrationWindow()
         {
             InitializeComponent();
             FiltrationData = new FiltrationData();
+            filtration.Cursor = cursor;
         }
 
         public FiltrationData FiltrationData { get; set; }
 
-        private void bGoBackToAllProducts_Click(object sender, RoutedEventArgs e)
+        private void CommandFiltration_Click(object sender, ExecutedRoutedEventArgs e)
         {
             FiltrationData.NameShort = tbNameShort.Text;
             FiltrationData.NameLong = tbNameLong.Text;
@@ -27,6 +31,11 @@ namespace lab4_5
             FiltrationData.IsAvailable = rbYes.IsChecked;
             FiltrationData.IsNotAvailable = rbNone.IsChecked;
 
+            Close();
+        }
+
+        private void CommandClose_Click(object sender, ExecutedRoutedEventArgs e)
+        {
             Close();
         }
     }

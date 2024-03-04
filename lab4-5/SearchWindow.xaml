@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab4_5"
+    x:Name="search"
         xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="lab4_5.SearchWindow"
+        xmlns:Components="clr-namespace:lab4_5.Components"
         mc:Ignorable="d"
         Title="SearchWindow" Height="450" Width="200">
     <Grid>
@@ -12,7 +14,15 @@
         <TextBlock HorizontalAlignment="Left" Margin="40,94,0,0" TextWrapping="Wrap" Text="Название полное" VerticalAlignment="Top"/>
         <TextBox  x:Name="tbNameShort" HorizontalAlignment="Center" Margin="0,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="tbNameLong" HorizontalAlignment="Center" Margin="0,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="bSearchByname" Content="Найти" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top"  Width="120" Click="bSearchByname_Click"/>
-        <Button x:Name="bGoBack" Content="Вернуться назад" HorizontalAlignment="Center" Margin="0,263,0,0" VerticalAlignment="Top" Width="120" Click="bGoBack_Click"/>
+        <Components:MyButton x:Name="bSearchByname" Content="{x:Static local:Resources.Search}" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Padding="10,5" Width="120" Command="Find">
+        <Button.CommandBindings>
+                <CommandBinding Command="Find" Executed="CommandSearchByname_Click"/>
+        </Button.CommandBindings>
+        </Components:MyButton>
+        <Components:MyButton x:Name="bGoBack" Content="{x:Static local:Resources.GoBack}" HorizontalAlignment="Center" Margin="0,263,0,0" VerticalAlignment="Top" Width="120" Padding="10,5" Command="Close">
+        <Button.CommandBindings>
+            <CommandBinding Command="Close" Executed="CommandGoBack_Click"/>
+        </Button.CommandBindings>
+        </Components:MyButton>
     </Grid>
 </Window>

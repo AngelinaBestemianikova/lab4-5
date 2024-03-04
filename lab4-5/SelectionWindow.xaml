@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab4_5"
+    x:Name="selection"
         xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="lab4_5.SelectionWindow"
+        xmlns:Components="clr-namespace:lab4_5.Components"
         mc:Ignorable="d"
         Title="SelectionWindow" Height="450" Width="200">
     <Grid>
@@ -22,10 +24,15 @@
         </ComboBox>
         <TextBlock HorizontalAlignment="Center" Margin="0,146,0,0" TextWrapping="Wrap" Text="Стоимость (число-число)" VerticalAlignment="Top"/>
         <TextBox x:Name="tbPrice" HorizontalAlignment="Left" Margin="30,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="bGoBack" Content="Сделать выборку" HorizontalAlignment="Left" Width="120" Margin="31,39,0,0" Grid.Row="1" VerticalAlignment="Top" Command="Close">
+        <Components:MyButton x:Name="bGoBack" Content="{x:Static local:Resources.GoBack}" HorizontalAlignment="Left" Width="120" Padding="10,5" Margin="30,78,0,0" Grid.Row="1" VerticalAlignment="Top" Command="Close">
             <Button.CommandBindings>
-                <CommandBinding Command="Close" Executed="CommandClose_Executed" />
+                <CommandBinding Command="Close" Executed="CommandClose_Click" />
             </Button.CommandBindings>
-        </Button>
+        </Components:MyButton>
+        <Components:MyButton x:Name="bGoBack_Копировать" Content="{x:Static local:Resources.Sorting}" HorizontalAlignment="Left" Width="120" Padding="10,5" Margin="31,30,0,0" Grid.Row="1" VerticalAlignment="Top" Command="Find">
+            <Components:MyButton.CommandBindings>
+                <CommandBinding Command="Find" Executed="CommandSorting_Click" />
+            </Components:MyButton.CommandBindings>
+        </Components:MyButton>
     </Grid>
 </Window>

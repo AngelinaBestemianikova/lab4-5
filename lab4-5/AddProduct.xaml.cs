@@ -7,8 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using static System.Net.Mime.MediaTypeNames;
 using Path = System.IO.Path;
 using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
 
@@ -20,6 +20,7 @@ namespace lab4_5
     public partial class AddProductWindow : Window
     {
         public List<Product> _productCollection;
+        private Cursor cursor = new Cursor(Application.GetRemoteStream(new Uri("Cursors/myCursor.cur", UriKind.Relative)).Stream);
 
         private Product product;
         private string pathToFile;
@@ -30,6 +31,7 @@ namespace lab4_5
             _productCollection = productCollection;
             product = new Product();
             pathToFile = Path.Combine(Environment.CurrentDirectory, "product_data.json");
+            add.Cursor = cursor;
 
             if (File.Exists(pathToFile))
             {
@@ -42,7 +44,7 @@ namespace lab4_5
             }
         }
 
-        private void bSaveToFile_Click(object sender, RoutedEventArgs e)
+        private void CommandSaveToFile_Click(object sender, ExecutedRoutedEventArgs e)
         {
             product.NameShort = tbNameShort.Text;
             product.NameLong = tbNameLong.Text;
@@ -116,7 +118,7 @@ namespace lab4_5
             Close();
         }
 
-        private void bLoadImage_Click(object sender, RoutedEventArgs e)
+        private void CommandLoadImage_Click(object sender, ExecutedRoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.jpg;*.png;*.gif)|*.jpg;*.png;*.gif";

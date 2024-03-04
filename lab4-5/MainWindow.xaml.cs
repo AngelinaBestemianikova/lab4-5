@@ -108,17 +108,31 @@ namespace lab4_5
             var filtrationWindow = new FiltrationWindow();
             filtrationWindow.ShowDialog();
 
-            var isAvailable = filtrationWindow.FiltrationData.IsAvailable;
-            var isNotAvailable = filtrationWindow.FiltrationData.IsNotAvailable;
+            var isAvailableCategory = filtrationWindow.FiltrationData.IsAvailable;
+            var isNotAvailableCategory = filtrationWindow.FiltrationData.IsNotAvailable;
+            var nameLongCategory = filtrationWindow.FiltrationData.NameLong;
+            var nameShortCategory = filtrationWindow.FiltrationData.NameShort;
+            var priceCategory = filtrationWindow.FiltrationData.Price;
+            var countryCategory = filtrationWindow.FiltrationData.Country;
+            var categoryCategory = filtrationWindow.FiltrationData.Category;
+            var scoreCategory = filtrationWindow.FiltrationData.Score;
+            var quantityCategory = filtrationWindow.FiltrationData.Quantity;
 
             ProductCollection = ProductCollection
-                .Where(p => !(bool)isAvailable! || p.IsAvailable)
-                .Where(p => !(bool)isNotAvailable! || p.IsNotAvailable)
+                .Where(p => !(bool)isAvailableCategory! || p.IsAvailable)
+                .Where(p => !(bool)isNotAvailableCategory! || p.IsNotAvailable)
+                .Where (p => string.IsNullOrEmpty(nameLongCategory) || p.Category.Contains(nameLongCategory))
+                .Where (p =>  string.IsNullOrEmpty(nameShortCategory) || p.NameShort.Contains(nameShortCategory))
+                .Where (p =>  string.IsNullOrEmpty(categoryCategory) || p.NameLong.Contains(categoryCategory))
+                .Where (p =>  string.IsNullOrEmpty(countryCategory) || p.Country.Contains(countryCategory))
+                .Where (p =>  string.IsNullOrEmpty(priceCategory) || (p.Price >= decimal.Parse(priceCategory)))
+                .Where (p =>  string.IsNullOrEmpty(quantityCategory) || (p.Quantity >= double.Parse(quantityCategory)))
+                .Where (p =>  string.IsNullOrEmpty(scoreCategory) || (p.Score >= double.Parse(scoreCategory)))
                 .ToList();
             productsGrid.ItemsSource = ProductCollection;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CommandLoadDate_Click(object sender, ExecutedRoutedEventArgs e)
         {
             LoadProductsFromFile("product_data.json");
             productsGrid.ItemsSource = ProductCollection;

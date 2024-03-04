@@ -21,6 +21,7 @@ namespace lab4_5
         private Product product;
         public List<Product> _productCollection;
         private Product _selectedProduct;
+        private Cursor cursor = new Cursor(Application.GetRemoteStream(new Uri("Cursors/myCursor.cur", UriKind.Relative)).Stream);
 
         public DetalizationWindow(Product selectedProduct)
         {
@@ -28,6 +29,7 @@ namespace lab4_5
             LoadProductsFromFile("product_data.json");
             FillForm(selectedProduct);
             _selectedProduct = selectedProduct;
+            detalization.Cursor = cursor;
         }
 
         private void bGoBackToAllProducts_Executed(object sender, ExecutedRoutedEventArgs e)

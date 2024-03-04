@@ -42,13 +42,16 @@
             </DataGrid>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20">
-                <Components:MyButton x:Name="AddProduct" Content="Добавить продукт" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="15,10" AutomationProperties.Name="AddProduct" Command="Open">
+                <Components:MyButton x:Name="AddProduct" Content="{x:Static local:Resources.AddProduct}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="15,10" AutomationProperties.Name="AddProduct" Command="Open">
                     <Button.CommandBindings>
                         <CommandBinding Command="Open" Executed="CommandAddProduct_Click"/>
                     </Button.CommandBindings>
                 </Components:MyButton>
-                <Components:MyButton Content="Загрузить данные" VerticalAlignment="Bottom" Padding="15,10" Click="Button_Click" HorizontalAlignment="Left" Width="130" Margin="10,0,0,0"/>
-
+                <Components:MyButton Content="{x:Static local:Resources.LoadDate}" VerticalAlignment="Bottom" Padding="15,10" HorizontalAlignment="Left" Width="130" Margin="10,0,0,0" Command="Open">
+                <Button.CommandBindings>
+                    <CommandBinding Command="Open" Executed="CommandLoadDate_Click"/>
+                </Button.CommandBindings>
+                </Components:MyButton>
             </StackPanel>
         </Grid>
     </Grid>

@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab4_5"
+        xmlns:Components="clr-namespace:lab4_5.Components"
+        x:Name="add"
         mc:Ignorable="d"
         Title="AddProduct" Height="450" Width="800">
     <Grid x:Name="bSaveToFile">
@@ -31,10 +33,18 @@
         <TextBox x:Name="tbCountry" HorizontalAlignment="Left" Margin="364,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="364,219,0,0" TextWrapping="Wrap" Text="Рейтинг" VerticalAlignment="Top"/>
         <TextBox x:Name="tbScore" HorizontalAlignment="Left" Margin="364,241,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="bGoBackToAllProducts" Content="Вернуться ко всем товарам" HorizontalAlignment="Left" Margin="364,364,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Click="bGoBackToAllProducts_Click"/>
+        <Components:MyButton x:Name="bGoBackToAllProducts" Content="{x:Static local:Resources.GoBack}" HorizontalAlignment="Left" Margin="364,364,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Click="bGoBackToAllProducts_Click"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="601,63,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button Content="Загрузить фотографию" HorizontalAlignment="Left" Margin="601,174,0,0" VerticalAlignment="Top" Padding="10,5" Click="bLoadImage_Click"/>
-        <Button Content="Сохранить в файл" HorizontalAlignment="Left" Margin="364,327,0,0" Padding="10,5" VerticalAlignment="Top" Click="bSaveToFile_Click" AutomationProperties.Name="bSaveToFile" Width="173"/>
+        <Components:MyButton Content="{x:Static local:Resources.LoadImage}" HorizontalAlignment="Left" Margin="601,174,0,0" VerticalAlignment="Top" Padding="10,5" Command="Open">
+        <Button.CommandBindings>
+            <CommandBinding Command="Open" Executed="CommandLoadImage_Click"/>
+        </Button.CommandBindings>
+        </Components:MyButton>
+        <Components:MyButton Content="{x:Static local:Resources.SaveToFile}" HorizontalAlignment="Left" Margin="364,327,0,0" Padding="10,5" VerticalAlignment="Top" Command="Save" AutomationProperties.Name="bSaveToFile" Width="173">
+        <Button.CommandBindings>
+            <CommandBinding Command="Save" Executed="CommandSaveToFile_Click"/>
+        </Button.CommandBindings>
+        </Components:MyButton>
     </Grid>
 
 </Window>

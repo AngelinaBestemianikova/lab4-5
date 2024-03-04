@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace lab4_5
 {
@@ -20,14 +10,16 @@ namespace lab4_5
     /// </summary>
     public partial class SearchWindow : Window
     {
+        private Cursor cursor = new Cursor(Application.GetRemoteStream(new Uri("Cursors/myCursor.cur", UriKind.Relative)).Stream);
         public SearchWindow()
         {
             InitializeComponent();
             SearchData = new SearchData();
+            search.Cursor = cursor;
         }
         public SearchData SearchData { get; set; }
 
-        private void bSearchByname_Click(object sender, RoutedEventArgs e)
+        private void CommandSearchByname_Click(object sender, ExecutedRoutedEventArgs e)
         {
             if (Regex.IsMatch(tbNameShort.Text, @"\d"))
             {
@@ -46,7 +38,7 @@ namespace lab4_5
             Close();
         }
 
-        private void bGoBack_Click(object sender, RoutedEventArgs e)
+        private void CommandGoBack_Click(object sender, ExecutedRoutedEventArgs e)
         {
             Close();
         }
