@@ -88,12 +88,12 @@ namespace lab4_5
             var category = selectionWindow.SelectionData.Category;
             var priceRange = selectionWindow.SelectionData.PriceRange;
 
-            var minPrice = 0.0m;
-            var maxPrice = 0.0m;
+            var minPrice = 0.0;
+            var maxPrice = 0.0;
             if (!string.IsNullOrEmpty(priceRange))
             {
-                minPrice = decimal.Parse(priceRange.Split('-')[0]);
-                maxPrice = decimal.Parse(priceRange.Split('-')[1]);
+                minPrice = double.Parse(priceRange.Split('-')[0]);
+                maxPrice = double.Parse(priceRange.Split('-')[1]);
             }
 
             ProductCollection = ProductCollection
@@ -125,7 +125,7 @@ namespace lab4_5
                 .Where (p =>  string.IsNullOrEmpty(nameShortCategory) || p.NameShort.Contains(nameShortCategory))
                 .Where (p =>  string.IsNullOrEmpty(categoryCategory) || p.NameLong.Contains(categoryCategory))
                 .Where (p =>  string.IsNullOrEmpty(countryCategory) || p.Country.Contains(countryCategory))
-                .Where (p =>  string.IsNullOrEmpty(priceCategory) || (p.Price >= decimal.Parse(priceCategory)))
+                .Where (p =>  string.IsNullOrEmpty(priceCategory) || (p.Price >= double.Parse(priceCategory)))
                 .Where (p =>  string.IsNullOrEmpty(quantityCategory) || (p.Quantity >= double.Parse(quantityCategory)))
                 .Where (p =>  string.IsNullOrEmpty(scoreCategory) || (p.Score >= double.Parse(scoreCategory)))
                 .ToList();

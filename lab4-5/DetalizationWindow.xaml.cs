@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -18,7 +19,7 @@ namespace lab4_5
     /// </summary>
     public partial class DetalizationWindow : Window
     {
-        private Product product;
+        private Product product = new Product();
         public List<Product> _productCollection;
         private Product _selectedProduct;
         private Cursor cursor = new Cursor(Application.GetRemoteStream(new Uri("Cursors/myCursor.cur", UriKind.Relative)).Stream);
@@ -132,6 +133,7 @@ namespace lab4_5
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
+            var img = _selectedProduct.PathToPhoto;
             var productToDelete = _productCollection.FirstOrDefault(p => p.NameLong == tbNameLong.Text);
 
             if (productToDelete != null)
@@ -139,24 +141,19 @@ namespace lab4_5
                 _productCollection.Remove(productToDelete);
             }
 
-            var product = new Product();
             product.NameShort = tbNameShort.Text;
             product.NameLong = tbNameLong.Text;
             product.Description = tbDescription.Text;
             product.Category = cbCategory.Text;
-            product.Country = tbCountry.Text;
-
-            var validationContext = new ValidationContext(product);
-            var results = new List<ValidationResult>();
-            if (!Validator.TryValidateObject(product, validationContext, results, true))
-            {
-                MessageBox.Show(results.First().ErrorMessage, "Ошибка валидации", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
 
             if (string.IsNullOrEmpty(tbQuantity.Text))
             {
                 MessageBox.Show("Поле 'Количесто' пустое. Введите количество", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (Regex.IsMatch(tbQuantity.Text, @"\D"))
+            {
+                MessageBox.Show("Поле 'Количество' должно содеражать только цифры", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             product.Quantity = double.Parse(tbQuantity.Text);
@@ -166,7 +163,12 @@ namespace lab4_5
                 MessageBox.Show("Поле 'Стоимость' пустое. Введите стоимость", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            product.Price = decimal.Parse(tbPrice.Text);
+            if (Regex.IsMatch(tbPrice.Text, @"\D+,"))
+            {
+                MessageBox.Show("Поле 'Стоимость' должно содеражать только цифры", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            product.Price = double.Parse(tbPrice.Text);
 
             if (rbYes.IsChecked == false && rbNone.IsChecked == false)
             {
@@ -181,12 +183,49 @@ namespace lab4_5
                 product.IsNotAvailable = true;
             }
 
+            if (Regex.IsMatch(tbCountry.Text, @"\d"))
+            {
+                MessageBox.Show("Поле 'Страна' должно содеражать только буквы", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            product.Country = tbCountry.Text;
+
             if (string.IsNullOrEmpty(tbScore.Text))
             {
                 MessageBox.Show("Поле 'Рейтинг' пустое. Введите рейтинг", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (Regex.IsMatch(tbScore.Text, @"\D+,"))
+            {
+                MessageBox.Show("Поле 'Рейтинг' должно содеражать только цифры", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             product.Score = double.Parse(tbScore.Text);
+
+            if (!string.IsNullOrEmpty(product.PathToPhoto))
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(product.PathToPhoto);
+                bitmap.EndInit();
+
+                image.Source = bitmap;
+                product.PathToPhoto = bitmap.UriSource.ToString();
+            }
+            else
+            {
+
+                product.PathToPhoto = img;
+            }
+
+
+            var validationContext = new ValidationContext(product);
+            var results = new List<ValidationResult>();
+            if (!Validator.TryValidateObject(product, validationContext, results, true))
+            {
+                MessageBox.Show(results.First().ErrorMessage, "Ошибка валидации", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             _productCollection.Add(product);
 
