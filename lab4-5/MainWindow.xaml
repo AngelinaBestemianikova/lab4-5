@@ -1,21 +1,22 @@
-﻿<Window
+﻿<Window x:Class="lab4_5.AllProductWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:lab4_5"
-    xmlns:Components="clr-namespace:lab4_5.Components" x:Class="lab4_5.AllProductWindow"
+    xmlns:Components="clr-namespace:lab4_5.Components" 
+    
     mc:Ignorable="d"
-    Title="MainWindow" Height="450" Width="800"
+    Title="MainWindow" Height="450" Width="800" SizeChanged="Window_SizeChanged" Background="AliceBlue" Icon="icon_push_24.ico"
     x:Name="mainForm">
-    <Grid>
+    <Grid x:Name="grid">
         <!-- Верхняя панель с меню -->
         <Grid>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Background="Navy">
-                <Button x:Name="menuAllProduct" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Все товары" Margin="5" Click="menuAllProduct_Click"/>
-                <Button x:Name="menuSearch" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Поиск" Margin="5" Click="menuSearch_Click"/>
-                <Button x:Name="menuFilter" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Фильтрация" Margin="5" Click="menuFilter_Click"/>
-                <Button x:Name="menuSelection" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="Выборка" Margin="5" Click="menuSelection_Click"/>
+                <Button x:Name="menuAllProduct" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="{x:Static local:Resources.AllProduct}" Margin="5" Click="menuAllProduct_Click"/>
+                <Button x:Name="menuSearch" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="{x:Static local:Resources.Search}" Margin="5" Click="menuSearch_Click"/>
+                <Button x:Name="menuFilter" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="{x:Static local:Resources.Filter}" Margin="5" Click="menuFilter_Click"/>
+                <Button x:Name="menuSelection" Background="Navy" BorderThickness="0" Foreground="#FFF" Content="{x:Static local:Resources.Selection}" Margin="5" Click="menuSelection_Click"/>
             </StackPanel>
         </Grid>
 
@@ -27,33 +28,35 @@
 
             <DataGrid x:Name="productsGrid" IsReadOnly="True" ItemsSource="{Binding ProductCollection}" AutoGenerateColumns="False" PreviewMouseDoubleClick="DataGrid_PreviewMouseDoubleClick" Margin="0,30,0,0">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Изображение" Width="Auto">
+                    <DataGridTemplateColumn Header="{x:Static local:Resources.Image}" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding PathToPhoto}" Width="50" Height="50"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Название товара" Binding="{Binding NameShort}" Width="*"/>
-                    <DataGridTextColumn Header="Категория" Binding="{Binding Category}" Width="*"/>
-                    <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="*"/>
-                    <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static local:Resources.NameShort}" Binding="{Binding NameShort}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static local:Resources.Category}" Binding="{Binding Category}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static local:Resources.Price}" Binding="{Binding Price}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static local:Resources.Quantity}" Binding="{Binding Quantity}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20">
+
+            <StackPanel x:Name="stackPanel" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20">
                 <Components:MyButton x:Name="AddProduct" Content="{x:Static local:Resources.AddProduct}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="15,10" AutomationProperties.Name="AddProduct" Command="Open">
                     <Button.CommandBindings>
                         <CommandBinding Command="Open" Executed="CommandAddProduct_Click"/>
                     </Button.CommandBindings>
                 </Components:MyButton>
-                <Components:MyButton Content="{x:Static local:Resources.LoadDate}" VerticalAlignment="Bottom" Padding="15,10" HorizontalAlignment="Left" Width="130" Margin="10,0,0,0" Command="Open">
-                <Button.CommandBindings>
-                    <CommandBinding Command="Open" Executed="CommandLoadDate_Click"/>
-                </Button.CommandBindings>
+                <Components:MyButton x:Name="bLoadimage" Content="{x:Static local:Resources.LoadDate}" VerticalAlignment="Bottom" Padding="15,10" HorizontalAlignment="Left" Width="130" Margin="10,0,0,0" Command="Open">
+                    <Button.CommandBindings>
+                        <CommandBinding Command="Open" Executed="CommandLoadDate_Click"/>
+                    </Button.CommandBindings>
                 </Components:MyButton>
+                <Components:MyButton x:Name="bLanguage" Content="{x:Static local:Resources.Language}" HorizontalAlignment="Left" Margin="308,0,0,0" Grid.Row="1" VerticalAlignment="Center" Padding="15,10" Click="bLanguage_Click"/>
             </StackPanel>
         </Grid>
     </Grid>
-    
+
 </Window>

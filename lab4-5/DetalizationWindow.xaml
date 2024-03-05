@@ -8,12 +8,8 @@
         xmlns:Components="clr-namespace:lab4_5.Components" 
     x:Name="detalization"
         mc:Ignorable="d"
-        Title="DetalizationWindow" Height="450" Width="830">
+        Title="DetalizationWindow" Height="450" Width="830"  Background="AliceBlue">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="52,47,0,0" TextWrapping="Wrap" Text="Название краткое" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,103,0,0" TextWrapping="Wrap" Text="Название полное" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,158,0,0" TextWrapping="Wrap" Text="Описание" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,215,0,0" TextWrapping="Wrap" Text="Категория" VerticalAlignment="Top"/>
         <ComboBox IsEnabled="False" x:Name="cbCategory" HorizontalAlignment="Left" Margin="52,237,0,0" VerticalAlignment="Top" Width="120">
             <System:String>Фрукты</System:String>
             <System:String>Овощи</System:String>
@@ -23,16 +19,9 @@
         <TextBox IsReadOnly="True" x:Name="tbNameShort" HorizontalAlignment="Left" Margin="52,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox IsReadOnly="True" x:Name="tbNameLong" HorizontalAlignment="Left" Margin="52,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox IsReadOnly="True" x:Name="tbDescription" HorizontalAlignment="Left" Margin="52,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,285,0,0" TextWrapping="Wrap" Text="Количество" VerticalAlignment="Top"/>
         <TextBox IsReadOnly="True" x:Name="tbQuantity" HorizontalAlignment="Left" Margin="52,307,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,347,0,0" TextWrapping="Wrap" Text="Стоимость" VerticalAlignment="Top"/>
         <TextBox IsReadOnly="True" x:Name="tbPrice" HorizontalAlignment="Left" Margin="52,369,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <RadioButton IsEnabled="False" x:Name="rbYes" Content="есть в наличии" HorizontalAlignment="Left" Margin="364,86,0,0" VerticalAlignment="Top"/>
-        <RadioButton IsEnabled="False" x:Name="rbNone" Content="нет в наличии" HorizontalAlignment="Left" Margin="364,108,0,0" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="364,55,0,0" TextWrapping="Wrap" Text="Наличие" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="364,157,0,0" TextWrapping="Wrap" Text="Страна поставщик" VerticalAlignment="Top"/>
         <TextBox IsReadOnly="True" x:Name="tbCountry" HorizontalAlignment="Left" Margin="364,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="364,219,0,0" TextWrapping="Wrap" Text="Рейтинг" VerticalAlignment="Top"/>
         <TextBox IsReadOnly="True" x:Name="tbScore" HorizontalAlignment="Left" Margin="364,241,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Components:MyButton x:Name="bGoBackToAllProducts" Content="{x:Static local:Resources.GoBackToAllProducts}" HorizontalAlignment="Left" Margin="364,364,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Command="Close">
             <Button.CommandBindings>
@@ -48,6 +37,17 @@
         </Components:MyButton>
         <Components:MyButton x:Name="DeleteProduct" Content="{x:Static local:Resources.Delete}" HorizontalAlignment="Left" Margin="717,364,0,0" VerticalAlignment="Top" Padding="10,5" Click="bDeleteProduct"/>
         <Components:MyButton IsEnabled="False" x:Name="SaveChanges" Content="{x:Static local:Resources.SaveToFile}" HorizontalAlignment="Left" Margin="601,326,0,0" VerticalAlignment="Top" Padding="10,5" Click="SaveChanges_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="52,47,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameShort}" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="52,103,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameLong}" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="52,158,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Decsription}" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="52,215,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Category}" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="52,285,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Quantity}" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="52,347,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Price}" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbYes" Content="{x:Static local:Resources.IsAvailable}" HorizontalAlignment="Center" Margin="0,86,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbNone" Content="{x:Static local:Resources.IsNotAvailable}" HorizontalAlignment="Left" Margin="364,108,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="364,55,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Available}" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="364,157,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Country}" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="364,219,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Score}" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

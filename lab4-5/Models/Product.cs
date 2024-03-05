@@ -23,6 +23,7 @@ namespace lab4_5.Models
         public string Description { get; set; }
 
         [Range(1, 5, ErrorMessage = "Введите рейтинг от 1 до 5")]
+        
         public double Score { get; set; }
 
         [Required(ErrorMessage = "Поле 'Страна-производитель' пустое. Выберите страну")]
@@ -31,6 +32,5 @@ namespace lab4_5.Models
         public bool IsAvailable { get; set; }
 
         public bool IsNotAvailable { get; set; }
-
     }
 }

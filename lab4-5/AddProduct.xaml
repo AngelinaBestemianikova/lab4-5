@@ -7,44 +7,60 @@
         xmlns:Components="clr-namespace:lab4_5.Components"
         x:Name="add"
         mc:Ignorable="d"
-        Title="AddProduct" Height="450" Width="800">
-    <Grid x:Name="bSaveToFile">
-        <TextBlock HorizontalAlignment="Left" Margin="52,47,0,0" TextWrapping="Wrap" Text="Название краткое" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,103,0,0" TextWrapping="Wrap" Text="Название полное" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,158,0,0" TextWrapping="Wrap" Text="Описание" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,215,0,0" TextWrapping="Wrap" Text="Категория" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbCategory" HorizontalAlignment="Left" Margin="52,237,0,0" VerticalAlignment="Top" Width="120" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-            <sys:String>Фрукты</sys:String>
-            <sys:String>Овощи</sys:String>
-            <sys:String>Зелень</sys:String>
-            <sys:String>Мясо</sys:String>
-        </ComboBox>
-        <TextBox x:Name="tbNameShort" HorizontalAlignment="Left" Margin="52,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbNameLong" HorizontalAlignment="Left" Margin="52,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbDescription" HorizontalAlignment="Left" Margin="52,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,285,0,0" TextWrapping="Wrap" Text="Количество" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbQuantity" HorizontalAlignment="Left" Margin="52,307,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,347,0,0" TextWrapping="Wrap" Text="Стоимость" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbPrice" HorizontalAlignment="Left" Margin="52,369,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <RadioButton x:Name="rbYes" Content="есть в наличии" HorizontalAlignment="Left" Margin="364,86,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rbNone" Content="нет в наличии" HorizontalAlignment="Left" Margin="364,108,0,0" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="364,55,0,0" TextWrapping="Wrap" Text="Наличие" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="364,157,0,0" TextWrapping="Wrap" Text="Страна поставщик" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbCountry" HorizontalAlignment="Left" Margin="364,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="364,219,0,0" TextWrapping="Wrap" Text="Рейтинг" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbScore" HorizontalAlignment="Left" Margin="364,241,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Components:MyButton x:Name="bGoBackToAllProducts" Content="{x:Static local:Resources.GoBack}" HorizontalAlignment="Left" Margin="364,364,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Click="bGoBackToAllProducts_Click"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="601,63,0,0" VerticalAlignment="Top" Width="100"/>
-        <Components:MyButton Content="{x:Static local:Resources.LoadImage}" HorizontalAlignment="Left" Margin="601,174,0,0" VerticalAlignment="Top" Padding="10,5" Command="Open">
-        <Button.CommandBindings>
-            <CommandBinding Command="Open" Executed="CommandLoadImage_Click"/>
-        </Button.CommandBindings>
-        </Components:MyButton>
-        <Components:MyButton Content="{x:Static local:Resources.SaveToFile}" HorizontalAlignment="Left" Margin="364,327,0,0" Padding="10,5" VerticalAlignment="Top" Command="Save" AutomationProperties.Name="bSaveToFile" Width="173">
-        <Button.CommandBindings>
-            <CommandBinding Command="Save" Executed="CommandSaveToFile_Click"/>
-        </Button.CommandBindings>
-        </Components:MyButton>
-    </Grid>
+        Title="AddProduct" Height="700" Width="770"  Background="AliceBlue"  SizeChanged="Window_SizeChanged">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid x:Name="bSaveToFile">
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="270"/>
+
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" x:Name="grid0">
+                <TextBlock HorizontalAlignment="Left" Margin="52,40,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameShort}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="52,96,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameLong}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="52,151,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Decsription}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="52,207,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Category}" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cbCategory" HorizontalAlignment="Left" Margin="52,229,0,0" VerticalAlignment="Top" Width="120" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <sys:String>Фрукты</sys:String>
+                    <sys:String>Овощи</sys:String>
+                    <sys:String>Зелень</sys:String>
+                    <sys:String>Мясо</sys:String>
+                </ComboBox>
+                <TextBox x:Name="tbNameShort" HorizontalAlignment="Left" Margin="52,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="tbNameLong" HorizontalAlignment="Left" Margin="52,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="tbDescription" HorizontalAlignment="Left" Margin="52,172,0,0" Text="" VerticalAlignment="Top" Width="120" AutoWordSelection="True"/>
+                <TextBlock HorizontalAlignment="Left" Margin="52,271,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Quantity}" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbQuantity" HorizontalAlignment="Left" Margin="52,293,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBlock HorizontalAlignment="Left" Margin="52,326,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Price}" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbPrice" HorizontalAlignment="Left" Margin="52,348,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            </Grid>
+            <Grid Grid.Column="1" x:Name="grid1">
+                <RadioButton x:Name="rbYes" Content="{x:Static local:Resources.IsAvailable}" HorizontalAlignment="Left" Margin="0,72,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="rbNone" Content="{x:Static local:Resources.IsNotAvailable}" HorizontalAlignment="Left" Margin="0,94,0,0" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0,41,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Available}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0,128,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Country}" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbCountry" HorizontalAlignment="Left" Margin="0,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0,183,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Score}" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbScore" HorizontalAlignment="Left" Margin="0,205,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            </Grid>
+
+            <Grid Grid.Column="2" x:Name="grid2">
+                <Components:MyButton Content="{x:Static local:Resources.SaveToFile}" HorizontalAlignment="Left" Margin="0,377,0,0" Padding="10,5" VerticalAlignment="Top" Command="Save" AutomationProperties.Name="bSaveToFile" Width="173">
+                    <Button.CommandBindings>
+                        <CommandBinding Command="Save" Executed="CommandSaveToFile_Click"/>
+                    </Button.CommandBindings>
+                </Components:MyButton>
+                <Components:MyButton x:Name="bGoBackToAllProducts" Content="{x:Static local:Resources.GoBack}" HorizontalAlignment="Left" Margin="0,327,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Click="bGoBackToAllProducts_Click"/>
+                <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="10,38,0,0" VerticalAlignment="Top" Width="100"/>
+                <Components:MyButton Content="{x:Static local:Resources.LoadImage}" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Padding="10,5" Command="Open">
+                    <Components:MyButton.CommandBindings>
+                        <CommandBinding Command="Open" Executed="CommandLoadImage_Click"/>
+                    </Components:MyButton.CommandBindings>
+                </Components:MyButton>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </Window>

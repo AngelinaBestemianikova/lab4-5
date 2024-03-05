@@ -8,6 +8,9 @@ using System.Windows.Controls;
 using Path = System.IO.Path;
 using lab4_5.Models;
 using System.Windows.Input;
+using System.Text.RegularExpressions;
+
+
 
 namespace lab4_5
 {
@@ -26,6 +29,8 @@ namespace lab4_5
             LoadProductsFromFile("product_data.json");
             
             mainForm.Cursor = cursor;
+            mainForm.Left = 100;
+            mainForm.Top = 100;
         }
 
         public void LoadProductsFromFile(string fileName)
@@ -90,12 +95,24 @@ namespace lab4_5
 
             var minPrice = 0.0;
             var maxPrice = 0.0;
+
             if (!string.IsNullOrEmpty(priceRange))
             {
-                minPrice = double.Parse(priceRange.Split('-')[0]);
-                maxPrice = double.Parse(priceRange.Split('-')[1]);
+                if (Regex.IsMatch(priceRange, @"^(?:[\d]+)(?:\\,\\d+)?-(?:[\d]+)(?:\\,\\d+)?$"))
+                {
+                    if (!string.IsNullOrEmpty(priceRange))
+                    {
+                        minPrice = double.Parse(priceRange.Split('-')[0]);
+                        maxPrice = double.Parse(priceRange.Split('-')[1]);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Недопустипый формат поля 'диапазон'. Ожидаемый формат: 'число-число", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
-
+                      
             ProductCollection = ProductCollection
                 .Where(p => string.IsNullOrEmpty(category) || p.Category.Contains(category))
                 .Where(p => string.IsNullOrEmpty(priceRange) || (p.Price >= minPrice && p.Price <= maxPrice))
@@ -114,16 +131,16 @@ namespace lab4_5
             var nameShortCategory = filtrationWindow.FiltrationData.NameShort;
             var priceCategory = filtrationWindow.FiltrationData.Price;
             var countryCategory = filtrationWindow.FiltrationData.Country;
-            var categoryCategory = filtrationWindow.FiltrationData.Category;
+            var category = filtrationWindow.FiltrationData.Category;
             var scoreCategory = filtrationWindow.FiltrationData.Score;
             var quantityCategory = filtrationWindow.FiltrationData.Quantity;
-
+            
             ProductCollection = ProductCollection
-                .Where(p => !(bool)isAvailableCategory! || p.IsAvailable)
-                .Where(p => !(bool)isNotAvailableCategory! || p.IsNotAvailable)
+                .Where(p => isAvailableCategory == null || (isAvailableCategory == true && p.IsAvailable) || (isAvailableCategory == false && !p.IsAvailable))
+                .Where(p => isNotAvailableCategory == null || (isNotAvailableCategory == true && p.IsNotAvailable) || (isNotAvailableCategory == false && !p.IsNotAvailable))
+                .Where(p => string.IsNullOrEmpty(category) || p.Category.Contains(category))
                 .Where (p => string.IsNullOrEmpty(nameLongCategory) || p.Category.Contains(nameLongCategory))
                 .Where (p =>  string.IsNullOrEmpty(nameShortCategory) || p.NameShort.Contains(nameShortCategory))
-                .Where (p =>  string.IsNullOrEmpty(categoryCategory) || p.NameLong.Contains(categoryCategory))
                 .Where (p =>  string.IsNullOrEmpty(countryCategory) || p.Country.Contains(countryCategory))
                 .Where (p =>  string.IsNullOrEmpty(priceCategory) || (p.Price >= double.Parse(priceCategory)))
                 .Where (p =>  string.IsNullOrEmpty(quantityCategory) || (p.Quantity >= double.Parse(quantityCategory)))
@@ -136,6 +153,60 @@ namespace lab4_5
         {
             LoadProductsFromFile("product_data.json");
             productsGrid.ItemsSource = ProductCollection;
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width < 680 && e.NewSize.Width > 400)
+            {
+                stackPanel.Orientation = Orientation.Horizontal;
+                double newLeftMargin = Math.Max(0, e.NewSize.Width - 380);
+                bLanguage.Margin = new Thickness(newLeftMargin, 10, 0, 0);
+                bLoadimage.Margin = new Thickness(10, 0, 0, 0);
+            }
+            else if (e.NewSize.Width <= 400)
+            {
+                stackPanel.Orientation = Orientation.Vertical;
+                bLanguage.Margin = new Thickness(0, 10, 0, 0);
+                bLoadimage.Margin = new Thickness(0, 10, 0, 0);
+            }
+            else
+            {
+                stackPanel.Orientation = Orientation.Horizontal;
+                bLanguage.Margin = new Thickness(308, 0, 0, 0);
+                bLoadimage.Margin = new Thickness(10, 0, 0, 0);
+            }
+        }
+
+        private void bLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            System.Globalization.CultureInfo currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+
+            if (currentCulture.Name == "ru-RU")
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            }
+            else
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ru-RU");
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ru-RU");
+            }
+
+            UpdateUiLocalization();
+        }
+
+        private void UpdateUiLocalization()
+        {
+            var newWindow = new AllProductWindow();
+            newWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+
+            newWindow.Left = 100;
+            newWindow.Top = 100;
+
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+            this.Close();
         }
     }
 }

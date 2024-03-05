@@ -120,6 +120,21 @@
   <data name="AddProduct" xml:space="preserve">
     <value>Add product</value>
   </data>
+  <data name="AllProduct" xml:space="preserve">
+    <value>All product</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Decsription" xml:space="preserve">
+    <value>Decsription</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -135,17 +150,47 @@
   <data name="GoBackToAllProducts" xml:space="preserve">
     <value>Go back to all products</value>
   </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="IsAvailable" xml:space="preserve">
+    <value>is available</value>
+  </data>
+  <data name="IsNotAvailable" xml:space="preserve">
+    <value>is not available</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="LoadDate" xml:space="preserve">
     <value>Load date</value>
   </data>
   <data name="LoadImage" xml:space="preserve">
     <value>Load image</value>
   </data>
+  <data name="NameLong" xml:space="preserve">
+    <value>NameLong</value>
+  </data>
+  <data name="NameShort" xml:space="preserve">
+    <value>NameShort</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
   <data name="SaveToFile" xml:space="preserve">
     <value>Save to file</value>
   </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Selection</value>
   </data>
   <data name="Sorting" xml:space="preserve">
     <value>Sorting</value>

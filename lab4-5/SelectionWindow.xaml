@@ -8,21 +8,21 @@
         xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="lab4_5.SelectionWindow"
         xmlns:Components="clr-namespace:lab4_5.Components"
         mc:Ignorable="d"
-        Title="SelectionWindow" Height="450" Width="200">
+        Title="SelectionWindow" Height="450" Width="200"  Background="AliceBlue">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="104*"/>
             <RowDefinition Height="113*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock HorizontalAlignment="Left" Margin="30,45,0,0" TextWrapping="Wrap" Text="Категория" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="30,45,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Category}" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbCategory" HorizontalAlignment="Left" Margin="30,67,0,0" VerticalAlignment="Top" Width="120">
             <System:String>Фрукты</System:String>
             <System:String>Овощи</System:String>
             <System:String>Зелень</System:String>
             <System:String>Мясо</System:String>
         </ComboBox>
-        <TextBlock HorizontalAlignment="Center" Margin="0,146,0,0" TextWrapping="Wrap" Text="Стоимость (число-число)" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,146,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Price}" VerticalAlignment="Top"/>
         <TextBox x:Name="tbPrice" HorizontalAlignment="Left" Margin="30,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Components:MyButton x:Name="bGoBack" Content="{x:Static local:Resources.GoBack}" HorizontalAlignment="Left" Width="120" Padding="10,5" Margin="30,78,0,0" Grid.Row="1" VerticalAlignment="Top" Command="Close">
             <Button.CommandBindings>

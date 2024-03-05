@@ -28,11 +28,15 @@ namespace lab4_5
 
         public AddProductWindow(List<Product> productCollection)
         {
+
             InitializeComponent();
+            SizeChanged += Window_SizeChanged;
             _productCollection = productCollection;
             product = new Product();
             pathToFile = Path.Combine(Environment.CurrentDirectory, "product_data.json");
             add.Cursor = cursor;
+            add.Left = 30;
+            add.Top = 30;
 
             if (File.Exists(pathToFile))
             {
@@ -50,7 +54,7 @@ namespace lab4_5
             product.NameShort = tbNameShort.Text;
             product.NameLong = tbNameLong.Text;
             product.Description = tbDescription.Text;
-            product.Category = cbCategory.Text;           
+            product.Category = cbCategory.Text;
 
             if (string.IsNullOrEmpty(tbQuantity.Text))
             {
@@ -69,12 +73,17 @@ namespace lab4_5
                 MessageBox.Show("Поле 'Стоимость' пустое. Введите стоимость", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (Regex.IsMatch(tbPrice.Text, @"\D+,"))
+            if (Regex.IsMatch(tbPrice.Text, @"\d+(?:\,\d+)?"))
             {
+                product.Price = double.Parse(tbPrice.Text);
+            }
+            else
+            {
+
                 MessageBox.Show("Поле 'Стоимость' должно содеражать только цифры", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            product.Price = double.Parse(tbPrice.Text);
+
 
             if (rbYes.IsChecked == false && rbNone.IsChecked == false)
             {
@@ -101,12 +110,17 @@ namespace lab4_5
                 MessageBox.Show("Поле 'Рейтинг' пустое. Введите рейтинг", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (Regex.IsMatch(tbScore.Text, @"\D+,"))
+            if (Regex.IsMatch(tbScore.Text, @"\d+(?:\,\d+)?"))
+            {
+                product.Score = double.Parse(tbScore.Text);
+
+            }
+            else
             {
                 MessageBox.Show("Поле 'Рейтинг' должно содеражать только цифры", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            product.Score = double.Parse(tbScore.Text);
+
 
             var validationContext = new ValidationContext(product);
             var results = new List<ValidationResult>();
@@ -158,6 +172,26 @@ namespace lab4_5
 
                 product.PathToPhoto = imagePath;
             }
-        }        
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width < 680)
+            {
+                add.Height = 1600;
+                grid1.Margin = new Thickness(-220, 350, 0, 0);
+                
+                double newLeftMargin = Math.Max(0, e.NewSize.Width - 280);
+                bGoBackToAllProducts.Margin = new Thickness(newLeftMargin, 340, 0, 0);
+            }
+            else
+            {
+                add.Height = 500;
+                grid1.Margin = new Thickness(0, 0, 0, 0);
+                grid2.Margin = new Thickness(0, 0, 0, 0);
+                bGoBackToAllProducts.Margin = new Thickness(0, 340, 0, 0);
+            }
+        }
+
     }
 }

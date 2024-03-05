@@ -89,11 +89,6 @@ namespace lab4_5
                 var jsonStringProduct = JsonSerializer.Serialize(_productCollection);
                 File.WriteAllText("product_data.json", jsonStringProduct);
             }
-
-            //AllProductWindow newWindow = new AllProductWindow();
-            //Application.Current.MainWindow = newWindow;
-            //newWindow.Show();
-            //this.Close();
         }
 
         private void bLoadImage_Click(object sender, RoutedEventArgs e)
