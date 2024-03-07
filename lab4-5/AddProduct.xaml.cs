@@ -79,7 +79,6 @@ namespace lab4_5
             }
             else
             {
-
                 MessageBox.Show("Поле 'Стоимость' должно содеражать только цифры", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -176,20 +175,34 @@ namespace lab4_5
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (e.NewSize.Width < 680)
+            if (e.NewSize.Width < 700 && e.NewSize.Width > 500)
             {
-                add.Height = 1600;
+                grid2.Margin = new Thickness(-220, 200, 0, 0);
+                bGoBackToAllProducts.Margin = new Thickness(0, 200, 0, 0);
+                bSaveToFile1.Margin = new Thickness(0, 240, 0, 10);
+                grid1.Margin = new Thickness(0, 0, 0, 0);
+            }
+            else if (e.NewSize.Width <= 500 && e.NewSize.Width > 430)
+            {
+                add.Height = 1200;
                 grid1.Margin = new Thickness(-220, 350, 0, 0);
-                
-                double newLeftMargin = Math.Max(0, e.NewSize.Width - 280);
-                bGoBackToAllProducts.Margin = new Thickness(newLeftMargin, 340, 0, 0);
+                grid2.Margin = new Thickness(-220, 310, 0, 0);
+            }
+            else if (e.NewSize.Width <= 430)
+            {
+                add.Height = 1400;
+                LoadImage.Margin = new Thickness(0, 135, 0, 0);
+                bSaveToFile1.Margin = new Thickness(0, 205, 0, 60);
+                bGoBackToAllProducts.Margin = new Thickness(0, 170, 0, 0);
+                grid2.Margin = new Thickness(-445, 555, 0, 0);
             }
             else
             {
-                add.Height = 500;
+                add.Height = 550;
+                bGoBackToAllProducts.Margin = new Thickness(0, 200, 0, 0);
+                bSaveToFile1.Margin = new Thickness(0, 240, 0, 10);
                 grid1.Margin = new Thickness(0, 0, 0, 0);
-                grid2.Margin = new Thickness(0, 0, 0, 0);
-                bGoBackToAllProducts.Margin = new Thickness(0, 340, 0, 0);
+                grid2.Margin = new Thickness(0, 0, 0, 0);              
             }
         }
 

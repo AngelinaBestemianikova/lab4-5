@@ -209,7 +209,6 @@ namespace lab4_5
             }
             else
             {
-
                 product.PathToPhoto = img;
             }
 
@@ -241,5 +240,41 @@ namespace lab4_5
             //rbYes.IsChecked = false;
             //image.Source = null;
         }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width < 700 && e.NewSize.Width > 580)
+            {   detal.Height = 550;
+                grid2.Margin = new Thickness(-220, 200, 0, 0);
+                bGoBackToAllProducts.Margin = new Thickness(0, 210, 0, 0);
+                SaveChanges.Margin = new Thickness(0, 250, 0, 0);
+                grid1.Margin = new Thickness(0, 0, 0, 0);
+                DeleteProduct.Margin = new Thickness(0, 290, 0, 0);
+                EditProduct.Margin = new Thickness(80, 290, 0, 0);
+            }
+            else if (e.NewSize.Width <= 580 && e.NewSize.Width > 480)
+            {
+                detal.Height = 650;
+                grid1.Margin = new Thickness(-220, 350, 0, 0);
+                grid2.Margin = new Thickness(-220, 310, 0, 0);
+            }
+            else if (e.NewSize.Width <= 480)
+            {
+                detal.Height = 900;
+                grid2.Margin = new Thickness(-445, 555, 0, 0);
+            }
+            else
+            {
+                detal.Height = 500;
+                SaveChanges.Margin = new Thickness(0, 250, 0, 0);
+                grid1.Margin = new Thickness(0, 0, 0, 0);
+                bGoBackToAllProducts.Margin = new Thickness(0, 210, 0, 0);
+                DeleteProduct.Margin = new Thickness(0, 290, 0, 0);
+                EditProduct.Margin = new Thickness(80, 290, 0, 0);
+                grid1.Margin = new Thickness(0, 0, 0, 0);
+                grid2.Margin = new Thickness(0, 0, 0, 0);
+            }
+        }
+
     }
 }

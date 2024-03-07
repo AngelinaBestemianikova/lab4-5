@@ -8,46 +8,62 @@
         xmlns:Components="clr-namespace:lab4_5.Components" 
     x:Name="detalization"
         mc:Ignorable="d"
-        Title="DetalizationWindow" Height="450" Width="830"  Background="AliceBlue">
-    <Grid>
-        <ComboBox IsEnabled="False" x:Name="cbCategory" HorizontalAlignment="Left" Margin="52,237,0,0" VerticalAlignment="Top" Width="120">
-            <System:String>Фрукты</System:String>
-            <System:String>Овощи</System:String>
-            <System:String>Зелень</System:String>
-            <System:String>Мясо</System:String>
-        </ComboBox>
-        <TextBox IsReadOnly="True" x:Name="tbNameShort" HorizontalAlignment="Left" Margin="52,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox IsReadOnly="True" x:Name="tbNameLong" HorizontalAlignment="Left" Margin="52,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox IsReadOnly="True" x:Name="tbDescription" HorizontalAlignment="Left" Margin="52,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox IsReadOnly="True" x:Name="tbQuantity" HorizontalAlignment="Left" Margin="52,307,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox IsReadOnly="True" x:Name="tbPrice" HorizontalAlignment="Left" Margin="52,369,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox IsReadOnly="True" x:Name="tbCountry" HorizontalAlignment="Left" Margin="364,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox IsReadOnly="True" x:Name="tbScore" HorizontalAlignment="Left" Margin="364,241,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Components:MyButton x:Name="bGoBackToAllProducts" Content="{x:Static local:Resources.GoBackToAllProducts}" HorizontalAlignment="Left" Margin="364,364,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Command="Close">
-            <Button.CommandBindings>
-                <CommandBinding Command="Close" Executed="bGoBackToAllProducts_Executed"/>
-            </Button.CommandBindings>
-        </Components:MyButton>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="601,63,0,0" VerticalAlignment="Top" Width="100"/>
-        <Components:MyButton x:Name="LoadImage" IsEnabled="False" Content="{x:Static local:Resources.LoadImage}" HorizontalAlignment="Left" Margin="601,174,0,0" VerticalAlignment="Top" Padding="10,5" Click="bLoadImage_Click"/>
-        <Components:MyButton x:Name="EditProduct" Content="{x:Static local:Resources.Edit}" HorizontalAlignment="Left" Margin="601,364,0,0" VerticalAlignment="Top" Padding="10,5" Command="Replace">
-            <Button.CommandBindings>
-                <CommandBinding Command="Replace" Executed="CommandBinding_Executed"/>
-            </Button.CommandBindings>
-        </Components:MyButton>
-        <Components:MyButton x:Name="DeleteProduct" Content="{x:Static local:Resources.Delete}" HorizontalAlignment="Left" Margin="717,364,0,0" VerticalAlignment="Top" Padding="10,5" Click="bDeleteProduct"/>
-        <Components:MyButton IsEnabled="False" x:Name="SaveChanges" Content="{x:Static local:Resources.SaveToFile}" HorizontalAlignment="Left" Margin="601,326,0,0" VerticalAlignment="Top" Padding="10,5" Click="SaveChanges_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,47,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameShort}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,103,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameLong}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,158,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Decsription}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,215,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Category}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,285,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Quantity}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="52,347,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Price}" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rbYes" Content="{x:Static local:Resources.IsAvailable}" HorizontalAlignment="Center" Margin="0,86,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rbNone" Content="{x:Static local:Resources.IsNotAvailable}" HorizontalAlignment="Left" Margin="364,108,0,0" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="364,55,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Available}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="364,157,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Country}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="364,219,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Score}" VerticalAlignment="Top"/>
+        Title="DetalizationWindow" Height="450" Width="830"  Background="AliceBlue" SizeChanged="Window_SizeChanged">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid x:Name="detal" VerticalAlignment="Top" HorizontalAlignment="Center">
 
-    </Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="270"/>
+
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" x:Name="grid0">
+                <TextBlock HorizontalAlignment="Left" Margin="52,47,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameShort}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="52,103,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameLong}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="52,158,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Decsription}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="52,215,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Category}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="52,285,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Quantity}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="52,347,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Price}" VerticalAlignment="Top"/>
+                <ComboBox IsEnabled="False" x:Name="cbCategory" HorizontalAlignment="Left" Margin="52,237,0,0" VerticalAlignment="Top" Width="120">
+                    <System:String>Фрукты</System:String>
+                    <System:String>Овощи</System:String>
+                    <System:String>Зелень</System:String>
+                    <System:String>Мясо</System:String>
+                </ComboBox>
+                <TextBox IsReadOnly="True" x:Name="tbNameShort" HorizontalAlignment="Left" Margin="52,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox IsReadOnly="True" x:Name="tbNameLong" HorizontalAlignment="Left" Margin="52,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox IsReadOnly="True" x:Name="tbDescription" HorizontalAlignment="Left" Margin="52,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox IsReadOnly="True" x:Name="tbQuantity" HorizontalAlignment="Left" Margin="52,307,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox IsReadOnly="True" x:Name="tbPrice" HorizontalAlignment="Left" Margin="52,369,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            </Grid>
+
+            <Grid Grid.Column="1" x:Name="grid1">
+                <TextBox IsReadOnly="True" x:Name="tbCountry" HorizontalAlignment="Left" Margin="0,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox IsReadOnly="True" x:Name="tbScore" HorizontalAlignment="Left" Margin="0,241,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <RadioButton x:Name="rbYes" Content="{x:Static local:Resources.IsAvailable}" HorizontalAlignment="Left" Margin="0,84,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="rbNone" Content="{x:Static local:Resources.IsNotAvailable}" HorizontalAlignment="Left" Margin="0,108,0,0" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0,55,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Available}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0,157,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Country}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0,219,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.Score}" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Grid.Column="2" x:Name="grid2">
+                <Components:MyButton x:Name="EditProduct" Content="{x:Static local:Resources.Edit}" HorizontalAlignment="Left" Margin="0,364,0,0" VerticalAlignment="Top" Padding="10,5" Command="Replace">
+                    <Button.CommandBindings>
+                        <CommandBinding Command="Replace" Executed="CommandBinding_Executed"/>
+                    </Button.CommandBindings>
+                </Components:MyButton>
+                <Components:MyButton x:Name="LoadImage" IsEnabled="False" Content="{x:Static local:Resources.LoadImage}" HorizontalAlignment="Left" Margin="0,174,0,0" VerticalAlignment="Top" Padding="10,5" Click="bLoadImage_Click"/>
+                <Components:MyButton x:Name="bGoBackToAllProducts" Content="{x:Static local:Resources.GoBack}" HorizontalAlignment="Left" Margin="0,280,0,0" Padding="10,5" VerticalAlignment="Top" AutomationProperties.Name="bGoBackToAllProducts" Command="Close">
+                    <Button.CommandBindings>
+                        <CommandBinding Command="Close" Executed="bGoBackToAllProducts_Executed"/>
+                    </Button.CommandBindings>
+                </Components:MyButton>
+                <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="0,63,0,0" VerticalAlignment="Top" Width="100"/>
+                <Components:MyButton x:Name="DeleteProduct" Content="{x:Static local:Resources.Delete}" HorizontalAlignment="Left" Margin="120,364,0,0" VerticalAlignment="Top" Padding="10,5" Click="bDeleteProduct"/>
+                <Components:MyButton IsEnabled="False" x:Name="SaveChanges" Content="{x:Static local:Resources.SaveToFile}" HorizontalAlignment="Left" Margin="0,326,0,0" VerticalAlignment="Top" Padding="10,5" Click="SaveChanges_Click"/>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </Window>

@@ -136,8 +136,8 @@ namespace lab4_5
             var quantityCategory = filtrationWindow.FiltrationData.Quantity;
             
             ProductCollection = ProductCollection
-                .Where(p => isAvailableCategory == null || (isAvailableCategory == true && p.IsAvailable) || (isAvailableCategory == false && !p.IsAvailable))
-                .Where(p => isNotAvailableCategory == null || (isNotAvailableCategory == true && p.IsNotAvailable) || (isNotAvailableCategory == false && !p.IsNotAvailable))
+                .Where(p => !(bool)isAvailableCategory! || p.IsAvailable)
+                .Where(p => !(bool)isNotAvailableCategory! || p.IsNotAvailable)
                 .Where(p => string.IsNullOrEmpty(category) || p.Category.Contains(category))
                 .Where (p => string.IsNullOrEmpty(nameLongCategory) || p.Category.Contains(nameLongCategory))
                 .Where (p =>  string.IsNullOrEmpty(nameShortCategory) || p.NameShort.Contains(nameShortCategory))

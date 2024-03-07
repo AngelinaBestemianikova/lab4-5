@@ -9,11 +9,11 @@
         xmlns:Components="clr-namespace:lab4_5.Components"
         mc:Ignorable="d"
         Title="SearchWindow" Height="450" Width="200"  Background="AliceBlue">
-    <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="40,38,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameShort}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="40,94,0,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameLong}" VerticalAlignment="Top"/>
-        <TextBox  x:Name="tbNameShort" HorizontalAlignment="Center" Margin="0,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbNameLong" HorizontalAlignment="Center" Margin="0,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+    <Grid HorizontalAlignment="Center">
+        <TextBlock Margin="40,38,40,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameShort}" VerticalAlignment="Top"/>
+        <TextBlock Margin="40,94,40,0" TextWrapping="Wrap" Text="{x:Static local:Resources.NameLong}" VerticalAlignment="Top"/>
+        <TextBox  x:Name="tbNameShort" Margin="0,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbNameLong" Margin="0,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Components:MyButton x:Name="bSearchByname" Content="{x:Static local:Resources.Search}" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Padding="10,5" Width="120" Command="Find">
         <Button.CommandBindings>
                 <CommandBinding Command="Find" Executed="CommandSearchByname_Click"/>

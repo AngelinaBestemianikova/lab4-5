@@ -36,7 +36,42 @@ namespace lab4_5
 
         private void CommandClose_Click(object sender, ExecutedRoutedEventArgs e)
         {
+            FiltrationData.NameShort = tbNameShort.Text;
+            FiltrationData.NameLong = tbNameLong.Text;
+            FiltrationData.Category = cbCategory.Text;
+            FiltrationData.Price = tbPrice.Text;
+            FiltrationData.Quantity = tbQuantity.Text;
+            FiltrationData.Score = tbScore.Text;
+            FiltrationData.Country = tbCountry.Text;
+            FiltrationData.IsAvailable = rbYes.IsChecked;
+            FiltrationData.IsNotAvailable = rbNone.IsChecked;
+
             Close();
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width < 700 && e.NewSize.Width > 470)
+            {
+                filtr.Height = 550;
+                bGoBackToAllProducts.Margin = new Thickness(0, 310, 0, 0);
+                bFiltration.Margin = new Thickness(0, 350, 0, 0);
+                grid1.Margin = new Thickness(0, 0, 0, 0);
+            }
+            else if (e.NewSize.Width <= 470)
+            {
+                filtr.Height = 700;
+                grid1.Margin = new Thickness(-250, 290, 0, 0);
+            }
+         
+            else
+            {
+                filtr.Height = 500;
+                grid1.Margin = new Thickness(0, 0, 0, 0);
+                bGoBackToAllProducts.Margin = new Thickness(0, 310, 0, 0);
+                bFiltration.Margin = new Thickness(0, 350, 0, 0);
+                grid1.Margin = new Thickness(0, 0, 0, 0);;
+            }
         }
     }
 
