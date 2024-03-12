@@ -54,7 +54,11 @@
                         <CommandBinding Command="Open" Executed="CommandLoadDate_Click"/>
                     </Button.CommandBindings>
                 </Components:MyButton>
-                <Components:MyButton x:Name="bLanguage" Content="{x:Static local:Resources.Language}" HorizontalAlignment="Left" Margin="308,0,0,0" Grid.Row="1" VerticalAlignment="Center" Padding="15,10" Click="bLanguage_Click"/>
+                <Components:MyButton x:Name="bLanguage" Content="{x:Static local:Resources.Language}" HorizontalAlignment="Left" Margin="308,0,0,0" Grid.Row="1" VerticalAlignment="Center" Padding="15,10" Command="Refresh">
+                    <Button.CommandBindings>
+                        <CommandBinding Command="Refresh" Executed="CommandLanguage_Click"/>
+                    </Button.CommandBindings>
+                </Components:MyButton>
             </StackPanel>
         </Grid>
     </Grid>

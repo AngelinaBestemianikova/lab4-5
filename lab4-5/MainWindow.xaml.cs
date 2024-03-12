@@ -178,7 +178,7 @@ namespace lab4_5
             }
         }
 
-        private void bLanguage_Click(object sender, RoutedEventArgs e)
+        private void CommandLanguage_Click(object sender, ExecutedRoutedEventArgs e)
         {
             System.Globalization.CultureInfo currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
 
